@@ -36,9 +36,9 @@
         <!-- The slime stands on the bar at the current position. The clamp keeps it inside the panel at both ends. -->
         <Progress class="h-4 rounded-none bg-foreground/10 bar-segments [--segments:28] sm:[--segments:48] lg:[--segments:64]" value={donePercent} aria-label="Game jam progress" />
     </div>
-    <div class="mt-3 flex items-center justify-between label-mono text-muted-foreground">
+    <div class="mt-3 flex items-center justify-between text-sm text-muted-foreground">
         <span>{formatTime(start, timeZone, true)}</span>
-        <span class="text-primary">{Math.floor(donePercent)}%</span>
+        <span class="label-mono text-primary">{Math.floor(donePercent)}%</span>
         <span>{formatTime(end, timeZone, true)}</span>
     </div>
 </section>

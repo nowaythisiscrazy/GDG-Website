@@ -6,6 +6,7 @@
     import IntroSequence from "$lib/components/ui/IntroSequence.svelte";
     import JamProgress from "$lib/components/ui/JamProgress.svelte";
     import Schedule from "$lib/components/ui/Schedule.svelte";
+    import SocialBubbles from "$lib/components/ui/SocialBubbles.svelte";
     import Timer from "$lib/components/ui/Timer.svelte";
     import { now } from "$lib/clock";
     import { formatDayRange } from "$lib/format";
@@ -29,7 +30,6 @@
 
     const dateRange = formatDayRange(GAMEJAM_START, GAMEJAM_END, GAMEJAM_TIME_ZONE);
 
-    const LABELS = { upcoming: "Approaching...", running: "Happening now", ended: "Ended" };
     const phase = $derived(now() < GAMEJAM_START ? "upcoming" : now() < GAMEJAM_END ? "running" : "ended");
 
     // TODO! the rrest of the page :laugh:
@@ -39,7 +39,6 @@
         { label: "itch.io", href: ITCHIO_URL },
     ];
 
-    let statusEl = $state<HTMLElement | null>(null);
     let titleEl = $state<HTMLElement | null>(null);
     let subtitleEl = $state<HTMLElement | null>(null);
     let markEl = $state<HTMLElement | null>(null);
@@ -55,7 +54,6 @@
     // the animations that play when the page contents starts to show (after the two rectangle and intro sequence thing)
     function playEntrance() {
         const steps: [HTMLElement | null, gsap.TweenVars, number][] = [
-            [statusEl, { x: -40 }, 0],
             [titleEl, { x: -60 }, 0.03],
             [subtitleEl, { x: -40 }, 0.06],
             [markEl, { x: 60 }, 0.06],
@@ -88,20 +86,21 @@
     <div class="w-full max-w-6xl">
         <!-- this is the top section above the timer-->
         <header class="mb-10 sm:mb-14 flex items-end justify-between gap-8">
-            <div>
-                <p bind:this={statusEl} class="label-mono inline-flex items-center gap-2 px-2.5 py-2 {phase === 'running' ? 'border-primary text-primary' : 'text-muted-foreground'}">
-                    <span class="size-1.5 {phase === 'running' ? 'bg-primary animate-pulse' : 'bg-muted-foreground'}"></span>
-                    [{LABELS[phase]}]
-                </p>
-                <h1 bind:this={titleEl} class="mt-5 text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase leading-[0.9] text-balance">
+            <div class="flex-1 min-w-0">
+                <h1 bind:this={titleEl} class="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase leading-[0.9] text-balance">
                     {GAMEJAM_NAME} <span class="text-primary">{GAMEJAM_EDITION}</span>
                 </h1>
-                <p bind:this={subtitleEl} class="mt-5 font-mono text-xs sm:text-sm uppercase tracking-[0.22em] text-muted-foreground">
-                    {dateRange} <span class="text-primary">//</span> {GAMEJAM_LOCATION}
-                </p>
+                <div bind:this={subtitleEl} class="mt-5 flex items-center justify-between gap-4">
+                    <p class="text-base sm:text-lg text-muted-foreground">
+                        Location: {GAMEJAM_LOCATION}
+                    </p>
+                    <div class="md:hidden shrink-0">
+                        <SocialBubbles />
+                    </div>
+                </div>
             </div>
-            <div bind:this={markEl} class="hidden md:block shrink-0 text-primary">
-                COOL THING HERE?
+            <div bind:this={markEl} class="hidden md:block shrink-0">
+                <SocialBubbles />
             </div>
         </header>
 

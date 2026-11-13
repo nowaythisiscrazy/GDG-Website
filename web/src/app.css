@@ -238,9 +238,9 @@
 
 /* Faint square grid. --grid-tile is the size of one square. */
 @utility bg-grid {
-	--grid-tile: 2.5rem;
+	--grid-tile: 4.15rem;
 	background-image:
-		linear-gradient(to right, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px),
-		linear-gradient(to bottom, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px);
+		linear-gradient(to right, color-mix(in srgb, var(--border) 75%, transparent) 1px, transparent 1px),
+		linear-gradient(to bottom, color-mix(in srgb, var(--border) 75%, transparent) 1px, transparent 1px);
 	background-size: var(--grid-tile) var(--grid-tile);
 }

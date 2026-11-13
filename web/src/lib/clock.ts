@@ -1,6 +1,6 @@
 import { createSubscriber } from "svelte/reactivity";
 
-const TICK_MS = 1000;
+const TICK_MS = 100;
 
 let current = new Date();
 let running = false;

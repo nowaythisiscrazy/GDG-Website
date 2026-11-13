@@ -46,10 +46,7 @@
 <!-- progress bars for active events -->
 {#if activeEvents.length > 0}
     <section class="panel mb-4 border-primary/60 p-5" aria-labelledby="schedule-now">
-        <h3 id="schedule-now" class="label-mono flex items-center gap-2 text-primary">
-            <span class="size-2 bg-primary animate-pulse"></span>
-            Happening Now
-        </h3>
+        <h3 id="schedule-now" class="font-medium text-primary">Happening Now:</h3>
         {#each activeEvents as event}
             {@const donePercent = 100 * (time.getTime() - event.start.getTime()) / (event.end.getTime() - event.start.getTime())}
             <div class="mt-4">
@@ -60,9 +57,9 @@
                     {/if}
                 </div>
                 <Progress class="mt-3 h-3 rounded-none bg-foreground/10 bar-segments [--segments:28] sm:[--segments:48] lg:[--segments:64]" value={donePercent} aria-label="{event.title} progress" />
-                <div class="mt-3 flex items-center justify-between label-mono text-muted-foreground">
+                <div class="mt-3 flex items-center justify-between text-sm text-muted-foreground">
                     <span>{formatTime(event.start, timeZone, true)}</span>
-                    <span>{formatTime(event.end, timeZone, true)}</span>
+                    <span>{formatTime(event.end, timeZone, dayKey(event.start, timeZone) !== dayKey(event.end, timeZone))}</span>
                 </div>
             </div>
         {/each}
@@ -76,9 +73,6 @@
             <header class="border-b border-border px-4 pt-4 pb-3 sm:px-5">
                 <p class="label-mono flex h-5 items-center gap-2 text-muted-foreground">
                     Day {i + 1}
-                    {#if isToday}
-                        <span class="bg-primary px-1.5 py-1 text-primary-foreground">Today</span>
-                    {/if}
                 </p>
                 <h3 class="mt-1 text-2xl font-bold uppercase leading-none {isToday ? 'text-primary' : ''}">{formatDay(day[0].start, timeZone)}</h3>
             </header>
