@@ -75,7 +75,7 @@
 
 <svelte:head>
     <title>{GAMEJAM_TITLE}</title>
-    <meta name="description" content="{GAMEJAM_TITLE}, {dateRange} at the {GAMEJAM_LOCATION}. Time remaining and the event schedule." />
+    <meta name="description" content="THE GLORIOUS." />
 </svelte:head>
 
 <IntroSequence text={GDG_NAME} onreveal={playEntrance} />
